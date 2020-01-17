@@ -36,7 +36,7 @@ router.post('/login', (req, res, next) => {
                 err.status = 401;
                 return next(err);
             } else {
-                bcrypt.compare(req.body.password, user.password)
+                bcrypt.compare(req.body.Password, user.Password)
                     .then((isMatch) => {
                         if (!isMatch) {
                             let err = new Error('Password does not match!');
