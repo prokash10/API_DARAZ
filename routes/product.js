@@ -38,7 +38,7 @@ const upload = multer({
 router.post('/save',upload.single('Image'),(req,res)=>{
     let newProduct = new Product({
         Description:req.body.Description,
-        //price:req.body.pricee,
+       
         Price:req.body.Price,
         
         Image:req.file.filename

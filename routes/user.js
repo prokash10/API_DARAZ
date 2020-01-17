@@ -29,14 +29,14 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-    User.findOne({ Email: req.body.Email })
+    User.findOne({ FullName: req.body.FullName })
         .then((user) => {
             if (user == null) {
                 let err = new Error('User not found!');
                 err.status = 401;
                 return next(err);
             } else {
-                bcrypt.compare(req.body.Password, user.Password)
+                bcrypt.compare(req.body.password, user.password)
                     .then((isMatch) => {
                         if (!isMatch) {
                             let err = new Error('Password does not match!');
@@ -49,5 +49,19 @@ router.post('/login', (req, res, next) => {
             }
         }).catch(next);
 })
+
+router.post('/user',(req,res,next)=>{
+    User.findOne({FullName:req.body.FullName})
+    .then((user) => {
+        if (user != null) {
+            res.json({ status: 'Login success!' });
+        } 
+        
+                    // let token = jwt.sign({ _id: user._id }, process.env.SECRET);
+                    
+                }).catch(next);
+        }
+    
+)
 
 module.exports = router;
